@@ -12,40 +12,42 @@ import yaml
 class Base:
     def __init__(self):
         with open('../config/config.yaml', 'r') as f:
-            config = yaml.safe_load(f)
-            # print(config)
+            self.config = yaml.safe_load(f)
 
-        http_style = config.get('http_style', {}).get('https', 'yes')
+        with open('../config/api_path_list.yaml', 'r') as f:
+            self.api_path_list = yaml.safe_load(f)
+
+        http_style = self.config.get('http_style', {}).get('https', 'yes')
         if http_style == 'yes':
             http_style = 'https'
         else:
             http_style = 'http'
 
-        ip = config.get('host', {}).get('ip', '119.147.212.162')
-        port = config.get('host', {}).get('port', '51080')
-        url = f'{http_style}://{ip}:{port}/iam/api/v1/users/login'
-        # print(url)
+        ip = self.config.get('host', {}).get('ip', '119.147.212.162')
+        port = self.config.get('host', {}).get('port', '51080')
+        login_api_path = self.api_path_list.get('api_path', {}).get('login', '/iam/api/v1/users/login')
+        self.base_url = f'{http_style}://{ip}:{port}'
+        login_url = f'{http_style}://{ip}:{port}{login_api_path}'
 
-        username = config.get('account', {}).get('username', 'jinglanghe')
-        password = config.get('account', {}).get('password', '522810d987bdfa2e6459a3632eb835e8')
+        username = self.config.get('account', {}).get('username', 'jinglanghe')
+        password = self.config.get('account', {}).get('password', '522810d987bdfa2e6459a3632eb835e8')
 
         payload = {
             "userName": f"{username}",
             "password": f"{password}"
         }
-        # print(payload)
 
-        response = requests.post(url, json=payload, verify=False).json()
+        response = requests.post(login_url, json=payload, verify=False).json()
+
         self.token = response['data']['token']
         # 声明一个Session
         self.s = requests.Session()
         # 把token放入到session，每次参数都有token
-        self.s.params = {'access_token': self.token}
-        print(self.s.params)
+        self.s.headers = {'authorization': f'Bearer {self.token}'}
 
     def send_requests(self, *args, **kwargs):
         # 用session
-        response = self.s.request(*args, **kwargs)
+        response = self.s.request(*args, **kwargs, verify=False)
         return response.json()
 
 

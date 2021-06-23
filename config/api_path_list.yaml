@@ -1,0 +1,3 @@
+api_path:
+  login: /iam/api/v1/users/login
+  get_scenes_list: /iqi/api/v1/scenes

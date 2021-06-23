@@ -1,0 +1,10 @@
+http_style:
+  https: 'yes'
+
+host:
+  ip: 119.147.212.162
+  port: 51080
+
+account:
+  username: jinglang
+  password: 522810d987bdfa2e6459a3632eb835e8

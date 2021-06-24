@@ -1,0 +1,4 @@
+data:
+  upload:
+    mod_id: songshanhu # 在松山湖项目中，前端写死
+    img: scene_img.jpg

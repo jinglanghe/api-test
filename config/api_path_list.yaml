@@ -5,4 +5,9 @@ apworkshop:
 
 scenes:
   scenes: /iqi/api/v1/scenes
-  scene-labels: /iqi/api/v1/scene-labels
+  scene_labels: /iqi/api/v1/scene-labels
+
+
+file_server:
+  upload: /file_server/api/v1/files
+

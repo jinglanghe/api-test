@@ -9,9 +9,9 @@ from api.base import Base
 
 
 class Apworkshop(Base):
+    # 模型工厂（预置模型）
 
-    # 模型工厂（预置模型后端）
-    # TODO
+    # 获取模型筛选类型
     def get_model_types(self):
         path = self.api_path_list.get('api_path', {}).get('apworkshop', {})\
             .get('model_types', '/iqi/api/v1/apworkshop/modelTypes')

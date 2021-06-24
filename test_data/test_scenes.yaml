@@ -1,0 +1,26 @@
+data:
+  scene_labels:
+    - "det_cls"
+    - "ocr"
+    - "seg"
+
+  model_types:
+    - "图像分类"
+    - "目标检查"
+
+  create_scenes:
+    name: null # 填null则为uuid随机名称
+    sceneFlag: null # 填null则从scene_labels随机选择
+    imagePath: null # 从上传服务器获取
+    meta:
+      modelList:
+        - uiName: voc
+          filterType: 图像分类
+        - uiName: detect
+          filterType: 目标检查
+      haveSubModel: true
+      subModelInfo:
+        filterType: 图像分类
+        amount: 14
+        uiName: sthelse
+    imageName: scene_img.jpg # 可填图片绝对路径。如果只填文件名，则从test_data目录下面找

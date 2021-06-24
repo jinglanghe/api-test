@@ -12,10 +12,11 @@ import os
 
 class Base:
     def __init__(self):
-        with open(os.path.join(os.path.dirname(__file__), '../config/config.yaml'), 'r') as f:
+        pwd = os.path.dirname(__file__)
+        with open(os.path.join(pwd, '../config/config.yaml'), 'r') as f:
             self.config = yaml.safe_load(f)
 
-        with open(os.path.join(os.path.dirname(__file__), '../config/api_path_list.yaml'), 'r') as f:
+        with open(os.path.join(pwd, '../config/api_path_list.yaml'), 'r') as f:
             self.api_path_list = yaml.safe_load(f)
 
         http_style = self.config.get('http_style', {}).get('https', 'yes')

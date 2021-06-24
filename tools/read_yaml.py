@@ -9,7 +9,7 @@ import yaml
 class ReadConfig:
     def __init__(self):
         pass
-    def rend_config(self, path):
-        with open(path, 'r') as f:
+    def read_config(self, path):
+        with open(path, 'r', encoding='utf8') as f:
             self.config = yaml.safe_load(f)
         return self.config

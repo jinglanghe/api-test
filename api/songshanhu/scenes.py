@@ -46,4 +46,4 @@ class Scenes(Base):
         payload['imagePath'] = upload_r.get('data').get('downloadLink')
 
         url = f'{self.base_url}{path}'
-        return self.send_requests("post", url, json=payload)
+        return [self.send_requests("post", url, json=payload), payload['imagePath'], url]

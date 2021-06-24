@@ -34,7 +34,6 @@ class TestScenes:
         scene_labels = set(jsonpath(r, '$..data')[0])  # 系统中一般预置了["det_cls", "ocr", "seg"]的标签
         assert set(self.test_data_scenes.get('data').get('scene_labels')) == set(scene_labels)
 
-
     def test_create_scene(self):
         payload: dict = self.test_data_scenes.get('data').get('create_scenes')
 
@@ -58,5 +57,28 @@ class TestScenes:
         if os.path.exists(image_name):
             payload['imageName'] = os.path.basename(image_name)
 
+        # 判断接口返回码
         r = self.scenes.create_scene(payload)
-        assert r.get('code', "create failed") == 0
+        assert r[0].get('code', "create failed") == 0
+
+        image_path = r[1]  # 图片上传的路径
+
+        scene_id = int(r[0].get('data'))  # 获取场景ID
+
+        # 调用列表接口查询
+        res: dict = self.scenes.get_scenes_list().get('data').get('items')
+        scene_info = {}
+        for i in res:
+            if int(i['id']) == scene_id:
+                scene_info = i
+                break
+        print(scene_info)
+        # 断言与输入一致
+        assert payload['name'] == scene_info.get('name')
+        assert payload['sceneFlag'] == scene_info.get('template').get('sceneFlag')
+
+        base_url = r[2]
+        print('-------------------')
+        print(base_url)
+        # TODO
+        # assert image_path ==

@@ -7,14 +7,14 @@
 """
 import requests
 import yaml
-
+import os
 
 class Base:
     def __init__(self):
-        with open('../config/config.yaml', 'r') as f:
+        with open(os.path.join(os.path.dirname(__file__), '../config/config.yaml'), 'r') as f:
             self.config = yaml.safe_load(f)
 
-        with open('../config/api_path_list.yaml', 'r') as f:
+        with open(os.path.join(os.path.dirname(__file__),'../config/api_path_list.yaml'), 'r') as f:
             self.api_path_list = yaml.safe_load(f)
 
         http_style = self.config.get('http_style', {}).get('https', 'yes')
@@ -23,14 +23,14 @@ class Base:
         else:
             http_style = 'http'
 
-        ip = self.config.get('host', {}).get('ip', '119.147.212.162')
-        port = self.config.get('host', {}).get('port', '51080')
-        login_api_path = self.api_path_list.get('api_path', {}).get('login', '/iam/api/v1/users/login')
+        ip = self.config.get('host', {}).get('ip')
+        port = self.config.get('host', {}).get('port')
+        login_api_path = self.api_path_list.get('login', '/iam/api/v1/users/login')
         self.base_url = f'{http_style}://{ip}:{port}'
         login_url = f'{http_style}://{ip}:{port}{login_api_path}'
 
-        username = self.config.get('account', {}).get('username', 'jinglanghe')
-        password = self.config.get('account', {}).get('password', '522810d987bdfa2e6459a3632eb835e8')
+        username = self.config.get('account', {}).get('username')
+        password = self.config.get('account', {}).get('password')
 
         payload = {
             "userName": f"{username}",

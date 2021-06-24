@@ -1,3 +1,8 @@
-api_path:
-  login: /iam/api/v1/users/login
-  get_scenes_list: /iqi/api/v1/scenes
+login: /iam/api/v1/users/login
+
+apworkshop:
+  model_types: /iqi/api/v1/apworkshop/modelTypes
+
+scenes:
+  scenes: /iqi/api/v1/scenes
+  scene-labels: /iqi/api/v1/scene-labels

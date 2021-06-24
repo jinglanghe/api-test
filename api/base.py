@@ -9,12 +9,13 @@ import requests
 import yaml
 import os
 
+
 class Base:
     def __init__(self):
         with open(os.path.join(os.path.dirname(__file__), '../config/config.yaml'), 'r') as f:
             self.config = yaml.safe_load(f)
 
-        with open(os.path.join(os.path.dirname(__file__),'../config/api_path_list.yaml'), 'r') as f:
+        with open(os.path.join(os.path.dirname(__file__), '../config/api_path_list.yaml'), 'r') as f:
             self.api_path_list = yaml.safe_load(f)
 
         http_style = self.config.get('http_style', {}).get('https', 'yes')
@@ -45,7 +46,7 @@ class Base:
         # 把token放入到session，每次参数都有token
         self.s.headers = {'authorization': f'Bearer {self.token}'}
 
-    def send_requests(self, *args, **kwargs):
+    def send_requests(self, *args, **kwargs) -> dict:
         # 用session
         response = self.s.request(*args, **kwargs, verify=False)
         return response.json()

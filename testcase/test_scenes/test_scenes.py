@@ -5,15 +5,18 @@
 @Time    : 2021/6/23 20:12
 @DESC  : 
 """
-import pytest
+
 from api.songshanhu.scenes import Scenes
 from jsonpath import *
-import yaml
+from tools.read_yaml import ReadConfig
+import os
+
 
 class TestScenes:
 
     def setup(self):
         self.scenes = Scenes()
+        self.test_data = ReadConfig().rend_config(os.path.join(os.path.dirname(__file__), './test_data.yaml'))
 
     def test_get_scenes_list(self):
         r = self.scenes.get_scenes_list()
@@ -22,9 +25,4 @@ class TestScenes:
     def test_get_scene_labels(self):
         r = self.scenes.get_scene_labels()
         scene_labels = set(jsonpath(r, '$..data')[0])
-        # print(scene_labels)
-
-
-
-
-
+        assert set(self.test_data.get('data').get('scene_labels')) == set(scene_labels)

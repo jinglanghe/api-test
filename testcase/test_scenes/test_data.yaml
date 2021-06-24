@@ -1,0 +1,5 @@
+data:
+  scene_labels:
+    - "det_cls"
+    - "ocr"
+    - "seg"

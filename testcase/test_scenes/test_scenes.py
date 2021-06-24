@@ -8,6 +8,7 @@
 import pytest
 from api.songshanhu.scenes import Scenes
 from jsonpath import *
+import yaml
 
 class TestScenes:
 
@@ -20,8 +21,10 @@ class TestScenes:
 
     def test_get_scene_labels(self):
         r = self.scenes.get_scene_labels()
-        scene_labels = jsonpath(r, '$..data')[0]
-        print(scene_labels)
+        scene_labels = set(jsonpath(r, '$..data')[0])
+        # print(scene_labels)
+
+
 
 
 

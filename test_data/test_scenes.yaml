@@ -1,8 +1,9 @@
 data:
   scene_labels:
     - "det_cls"
+    - "det"
     - "ocr"
-    - "seg"
+    - "segmentation"
 
   model_types:
     - "图像分类"

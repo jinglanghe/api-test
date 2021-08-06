@@ -78,7 +78,7 @@ class TestScenes:
         assert payload['sceneFlag'] == scene_info.get('template').get('sceneFlag')
 
         base_url = r[2]
-        print('-------------------')
+        # print('-------------------')
         print(base_url)
         # TODO
         # assert image_path ==

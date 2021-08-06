@@ -2,9 +2,9 @@ http_style:
   https: 'yes'
 
 host:
-  ip: 119.147.212.162
-  port: 51080
+  ip: 182.138.104.162
+  port: 16480
 
 account:
-  username: jinglang
-  password: 522810d987bdfa2e6459a3632eb835e8
+  username: testadmin
+  password: 9749b186d989ef9eb5cd858a189d0605

@@ -8,7 +8,9 @@
 import requests
 import yaml
 import os
-
+import urllib3
+###
+from tools.run_log import RunLog
 
 class Base:
     def __init__(self):
@@ -38,8 +40,9 @@ class Base:
             "userName": f"{username}",
             "password": f"{password}"
         }
-
+        urllib3.disable_warnings()
         response = requests.post(login_url, json=payload, verify=False).json()
+        # print(response)
 
         self.token = response['data']['token']
         # 声明一个Session
@@ -47,9 +50,23 @@ class Base:
         # 把token放入到session，每次参数都有token
         self.s.headers = {'authorization': f'Bearer {self.token}'}
 
+        ###
+
+
     def send_requests(self, *args, **kwargs) -> dict:
         # 用session
+        urllib3.disable_warnings()
+
         response = self.s.request(*args, **kwargs, verify=False)
+        ###
+
+        run_log = RunLog()
+        run_log.info(f'---------------------')
+        run_log.info(f'Full URL:  {response.request.url}')
+        run_log.info(f'Status code:  {response.status_code}')
+        run_log.info(f'Request parameters:  {response.request.body}')
+        run_log.info(response.json())
+        ###
         return response.json()
 
 

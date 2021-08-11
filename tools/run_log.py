@@ -12,35 +12,22 @@ import logging
 
 class RunLog(object):
     def __init__(self):
-        self.loger()
+        self.my_log()
 
     # 设置相应的日志格式
-    def loger(self):
-        self.logger = logging.getLogger()
-        self.logger.setLevel(logging.DEBUG)
-        # print('-----------------------')
+    def my_log(self):
+        self.logger = logging.getLogger('mylog.log')
+        if not self.logger.handlers:
 
-        format = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
-        # print(format)
-        myStreamHandler = logging.StreamHandler()
-        # print(myStreamHandler)
-        myStreamHandler.setFormatter(format)
-        # print(myStreamHandler)
+            myStreamHandler = logging.StreamHandler()
+            self.logger.setLevel(logging.DEBUG)
+            format = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
 
-        # print(myFileHandler)
-        self.logger.addHandler(myStreamHandler)
-        # print(self.logger)
-        """
-        <logging.Logger object at 0x0000000001F39AC8>
-        10
-        <logging.Formatter object at 0x00000000021E8E80>
-        <logging.StreamHandler object at 0x00000000026D9940>
-        <logging.StreamHandler object at 0x00000000026BA908>
-        <logging.FileHandler object at 0x00000000026EA860>
+            myStreamHandler.setFormatter(format)
 
+            self.logger.addHandler(myStreamHandler)
+        return self.logger
 
-        <logging.Logger object at 0x0000000002638E48>
-        """
 
     def info(self, text):
         return self.logger.info(text)

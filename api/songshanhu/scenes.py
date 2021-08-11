@@ -16,7 +16,7 @@ from random import choice
 class Scenes(Base):
     # 场景管理
     def __init__(self):
-        super().__init__()
+        Base.__init__(self)
         pwd = os.path.dirname(__file__)
         self.read = ReadConfig()
         self.file_server = FileServer()

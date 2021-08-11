@@ -72,13 +72,13 @@ class TestScenes:
             if int(i['id']) == scene_id:
                 scene_info = i
                 break
-        print(scene_info)
+        # print(scene_info)
         # 断言与输入一致
         assert payload['name'] == scene_info.get('name')
         assert payload['sceneFlag'] == scene_info.get('template').get('sceneFlag')
 
         base_url = r[2]
         # print('-------------------')
-        print(base_url)
+        # print(base_url)
         # TODO
         # assert image_path ==

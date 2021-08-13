@@ -18,5 +18,6 @@ data:
 
   create_project:
     name: "{uuid}"
-    description: ""
-    type: ""
+    description: "{uuid}, {nowtime}"
+    type_pro: "专家模式"
+    type_preset: ""

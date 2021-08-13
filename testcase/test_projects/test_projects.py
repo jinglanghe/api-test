@@ -14,10 +14,11 @@ import uuid
 from datetime import datetime
 from hamcrest import *
 from tools.run_log import RunLog
+import allure
 logger = RunLog()
 
-
-class TestScenes:
+@allure.feature('项目管理测试用例')
+class TestProtects:
 
     def setup(self):
         self.projects = Projects()
@@ -46,6 +47,7 @@ class TestScenes:
     #     r = self.projects.create_project(payload)
     #     # TODO
 
+    @allure.story('项目列表接口，测试项目列表默认按创建时间倒序排返回')
     def test_get_project_lists(self):
         r = self.projects.get_project_lists()
         r_jsonpath : list = jsonpath(r, '$..data..items..createdAt') # 获取所有项目的创建时间数组

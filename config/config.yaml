@@ -1,10 +1,10 @@
 http_style:
-  https: 'yes'
+  https: 'no'
 
 host:
-  ip: 123.60.231.101
+  ip: 192.168.3.172
   port: 80
 
 account:
-  username: jinglang
+  username: hjl-admin
   password: 9749b186d989ef9eb5cd858a189d0605

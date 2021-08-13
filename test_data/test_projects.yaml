@@ -1,14 +1,4 @@
 data:
-  scene_labels:
-    - "det_cls"
-    - "det"
-    - "ocr"
-    - "segmentation"
-
-  model_types:
-    - "图像分类"
-    - "目标检查"
-
   create_scenes:
     name: null # 填null则为uuid随机名称
     sceneFlag: null # 填null则从scene_labels随机选择
@@ -25,3 +15,8 @@ data:
         amount: 14
         uiName: sthelse
     imageName: scene_img.jpg # 可填图片绝对路径。如果只填文件名，则从test_data目录下面找
+
+  create_project:
+    name: "{uuid}"
+    description: ""
+    type: ""

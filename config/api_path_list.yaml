@@ -1,13 +1,13 @@
-login: /iam/api/v1/users/login
+iam:
+  login: /iam/api/v1/users/login
 
-apworkshop:
-  model_types: /iqi/api/v1/apworkshop/modelTypes
-
-scenes:
-  scenes: /iqi/api/v1/scenes
-  scene_labels: /iqi/api/v1/scene-labels
-
-
-file_server:
-  upload: /file_server/api/v1/files
-
+projects:
+  create_project: /ai-arts/api/v1/projects
+  delete_project: /ai-arts/api/v1/projects/{id}
+  get_project: /ai-arts/api/v1/projects/{id}
+  get_project_lists: /ai-arts/api/v1/projects/list
+  start_code_lab: /ai-arts/api/v1/projects/{id}/code-lab/start
+  get_code_lab: /ai-arts/api/v1/projects/{id}/code-lab
+  get_code_lab_list: /ai-arts/api/v1/projects/{id}/code-lab/list
+  stop_code_lab: /ai-arts/api/v1/projects/{id}/code-lab/stop
+  get_dataset_list: /ai-arts/api/v1/datasets

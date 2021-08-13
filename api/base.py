@@ -10,9 +10,11 @@ import yaml
 import os
 import urllib3
 from tools.run_log import RunLog
+import json
 
-urllib3.disable_warnings()
+# urllib3.disable_warnings()
 pwd = os.path.dirname(__file__)
+logger = RunLog()
 
 
 class Base:
@@ -56,7 +58,7 @@ class Base:
         # 如果token配置文件为空，则调用登录接口获取token，并写回token配置文件中
         # 如果token配置文件不为空，则直接使用token
         if self.token == '' or self.token is None:
-            login_api_path = self.api_path_list.get('login', '/iam/api/v1/users/login')
+            login_api_path = self.api_path_list.get('iam', {}).get('login', '/iam/api/v1/users/login')
 
             login_url = f'{self.base_url}{login_api_path}'
 
@@ -67,7 +69,7 @@ class Base:
                 "userName": f"{username}",
                 "password": f"{password}"
             }
-
+            urllib3.disable_warnings()
             response = requests.post(login_url, json=payload, verify=False).json()
 
             self.token = response['data']['token']
@@ -77,29 +79,19 @@ class Base:
 
     # 封装request
     def send_requests(self, *args, **kwargs) -> dict:
-        # 用session
-        urllib3.disable_warnings()
-
         response = self.s.request(*args, **kwargs, verify=False)
+        response.encoding = 'utf8'
 
-        run_log = RunLog()
-        run_log.info(f'---------------------')
-        run_log.info(f'Full URL:  {response.request.url}, method:{args[0]}')
-        run_log.info(f'Status code:  {response.status_code}')
-        # run_log.info(f'Request parameters:  {response.request.body}')
-        run_log.info(response.json())
+        logger.info(f'---------------------')
+        logger.info(f'Full URL:  {response.request.url}, method:{response.request.method}')
+        logger.info(f'Status code:  {response.status_code}')
+        if response.request.body:
+            logger.info(f'Request body:  {json.loads(response.request.body)}')
+        else:
+            logger.info(f'Request body:  {response.request.body}')
+        logger.info(response.json())
         return response.json()
 
 
 if __name__ == '__main__':
     test = Base()
-    # with open(os.path.join(pwd, '../config/token.txt'), 'r') as i:
-    #     token = str(i.read())
-    # print(token == '')
-    # token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjMwMDAxLCJ1c2VyTmFtZSI6ImFkbWluIiwiZXhwIjoxNj' \
-    #         'I4NzM0Mjc3LCJpYXQiOjE2Mjg1NjE0Nzd9.AydUw7WuO9nx3SozevT6Z8yiOoXE0XJ78PJkx2khfqU'
-    # with open(os.path.join(pwd, '../config/token.txt'), 'w') as j:
-    #     j.write(token)
-    # data = {'userName': 'jinglang', 'password': '522810d987bdfa2e6459a3632eb835e8'}
-    # r = requests.post(url='https://119.147.212.162:51080/iam/api/v1/users/login', json=data, verify=False)
-    # print(r)

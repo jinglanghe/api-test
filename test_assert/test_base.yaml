@@ -1,0 +1,7 @@
+api:
+  # api一般的返回
+  response:
+    code:
+      success: 0
+    msg:
+      success: 'success'

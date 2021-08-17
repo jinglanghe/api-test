@@ -22,12 +22,14 @@ class Base:
         self.token = ''
 
         # 读取配置
-        with open(os.path.join(pwd, '../config/config.yaml'), 'r') as f:
+        with open(os.path.join(pwd, '../config/config.yaml'), 'r', encoding='utf8') as f:
             self.config = yaml.safe_load(f)
 
-        # 读取配置
-        with open(os.path.join(pwd, '../config/api_path_list.yaml'), 'r') as g:
+        with open(os.path.join(pwd, '../config/api_path_list.yaml'), 'r', encoding='utf8') as g:
             self.api_path_list = yaml.safe_load(g)
+
+        # 读取配置
+
 
         # 确认是http还是https
         http_style = self.config.get('http_style', {}).get('https', 'yes')
@@ -52,8 +54,8 @@ class Base:
     # 登录方法，获取token
     def login_get_token(self):
         # 读token配置文件
-        with open(os.path.join(pwd, '../config/token.txt'), 'r') as h:
-            self.token = str(h.read())
+        with open(os.path.join(pwd, '../config/token.txt'), 'r', encoding='utf8') as i:
+            self.token = str(i.read())
 
         # 如果token配置文件为空，则调用登录接口获取token，并写回token配置文件中
         # 如果token配置文件不为空，则直接使用token
@@ -73,8 +75,8 @@ class Base:
             response = requests.post(login_url, json=payload, verify=False).json()
 
             self.token = response['data']['token']
-            with open(os.path.join(pwd, '../config/token.txt'), 'w') as h:
-                h.write(self.token)
+            with open(os.path.join(pwd, '../config/token.txt'), 'w', encoding='utf8') as j:
+                j.write(self.token)
         return self.token
 
     # 封装request
@@ -82,7 +84,7 @@ class Base:
         response = self.s.request(*args, **kwargs, verify=False)
         response.encoding = 'utf8'
 
-        logger.info(f'---------------------')
+        # logger.info(f'---------------------')
         logger.info(f'Full URL:  {response.request.url}, method:{response.request.method}')
         logger.info(f'Status code:  {response.status_code}')
         if response.request.body:

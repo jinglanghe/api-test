@@ -1,23 +1,37 @@
 data:
-  create_scenes:
-    name: null # 填null则为uuid随机名称
-    sceneFlag: null # 填null则从scene_labels随机选择
-    imagePath: null # 从上传服务器获取
-    meta:
-      modelList:
-        - uiName: voc
-          filterType: 图像分类
-        - uiName: detect
-          filterType: 目标检查
-      haveSubModel: true
-      subModelInfo:
-        filterType: 图像分类
-        amount: 14
-        uiName: sthelse
-    imageName: scene_img.jpg # 可填图片绝对路径。如果只填文件名，则从test_data目录下面找
-
   create_project:
     name: "{uuid}"
     description: "{uuid}, {nowtime}"
     type_pro: "专家模式"
     type_preset: ""
+
+  start_code_lab:
+    config:
+      imageSource: 镜像中心
+      imageName: >-
+        harbor.apulis.cn:8443/algorithm/apulistech/horovod:0.20.0-tf2.3.0-torch1.6.0-mxnet1.6.0.post0-py3.7-cuda10.1-nni1.9
+      dataSets: []
+      resourceInfo:
+        cpu: '1'
+        memory: 4G
+        device:
+          deviceType: ''
+          deviceNum: ''
+          computeType: ''
+          series: ''
+
+  code_lab_status:
+    not_start: 0
+    init: 1
+    starting: 2
+    queued: 3
+    scheduling: 4
+    closing: 5
+    waiting_close: 6
+    running: 7
+    killing: 99
+    finished: 100
+    terminated: 101
+    error: 102
+    failed: 103
+    save_failed: 104

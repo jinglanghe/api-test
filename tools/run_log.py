@@ -27,7 +27,8 @@ class RunLog(object):
             self.logger.setLevel('DEBUG')  # 设置收集器的级别，不设定的话，默认收集warning及以上级别的日志
 
             fmt = logging.Formatter('%(filename)s-%(lineno)d-%(asctime)s-%(levelname)s-%(message)s')  # 设置日志格式
-
+            if not os.path.exists('../log'):
+                os.makedirs('../log')
             log_file = os.path.join(pwd, f'../log/{date_time}.log')
             file_handler = logging.FileHandler(log_file, encoding='utf8')  # 设置日志处理器-输出到文件
 

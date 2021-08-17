@@ -22,7 +22,7 @@ logger = RunLog()
 @allure.feature('项目管理测试用例')
 class TestProtects:
 
-    def setup_class(self):
+    def setup(self):
         self.projects = Projects()
         pwd = os.path.dirname(__file__)
         self.read = ReadConfig()
@@ -51,13 +51,13 @@ class TestProtects:
         self.start_code_lab_payload: dict = self.test_data_projects['data']['start_code_lab']
 
         # 代码开发环境状态码列表
-        self.code_lab_status: dict = self.test_data_projects['data']['code_lab_status']
+        # self.code_lab_status: dict = self.test_data_projects['data']['code_lab_status']
 
         # 以下测试用例都将先创建一个项目再进行测试
-    #     self.r_create_project = self.projects.create_project(self.create_project_payload)
-    #     self.project_id = jsonpath(self.r_create_project, '$.data.id')[0]
-    #
-    # def teardown_class(self):
+        # self.r_create_project = self.projects.create_project(self.create_project_payload)
+        # self.project_id = jsonpath(self.r_create_project, '$.data.id')[0]
+
+    # def teardown(self):
     #     #  数据清理
     #     self.projects.delete_project(self.project_id)
     #     logger.info(f"数据清理，删除项目，id {self.project_id}")

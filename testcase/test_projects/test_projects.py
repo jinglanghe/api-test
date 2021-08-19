@@ -62,7 +62,7 @@ class TestProtects:
     #     #  数据清理
     #     self.projects.delete_project(self.project_id)
     #     logger.info(f"数据清理，删除项目，id {self.project_id}")
-
+    # @pytest.mark.repeat(20)
     @allure.story('项目列表接口，测试正常创建专家模式项目')
     def test_create_project(self):
 
@@ -83,9 +83,9 @@ class TestProtects:
             logger.info("断言成功，项目添加成功")
 
         # 数据清理
-        project_id = jsonpath(r, '$.data.id')[0]
-        self.projects.delete_project(project_id)
-        logger.info(f"数据清理，删除项目，id {project_id}")
+        # project_id = jsonpath(r, '$.data.id')[0]
+        # self.projects.delete_project(project_id)
+        # logger.info(f"数据清理，删除项目，id {project_id}")
 
     @allure.story('项目列表接口，测试项目列表默认按创建时间【倒序】排返回')
     def test_get_project_lists(self):
@@ -102,6 +102,9 @@ class TestProtects:
                 assert projects_create_times == sorted(projects_create_times, reverse=True)
             else:
                 logger.info("断言成功，项目列表默认按创建时间倒序排返回")
+        else:
+            logger.error(f"断言失败, 无法获取项目列表")
+            raise AssertionError
 
     @allure.story('项目列表接口，正常删除项目')
     def test_delete_project(self):
@@ -207,6 +210,7 @@ class TestProtects:
                 assert code_stop == self.api_code_success and message_stop == self.api_msg_success
             else:
                 logger.info("断言成功，停止代码开发环境成功")
+            # 需增加jupyter 、 ssh的判断 TODO
 
             #  数据清理
             # 查询job的状态，当job状态变为terminated，再去删除项目

@@ -17,4 +17,4 @@ with open(os.path.join(pwd, '../test_assert/test_base.yaml'), 'r', encoding='utf
     print(api_code_success, api_msg_success)
 
 print('confict test')
-print('11111111111111111')
+print('33333333333333333')

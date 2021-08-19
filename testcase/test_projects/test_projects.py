@@ -15,6 +15,7 @@ from datetime import datetime
 from tools.run_log import RunLog
 import allure
 import time
+import pytest
 
 logger = RunLog()
 
@@ -91,14 +92,14 @@ class TestProtects:
         logger.info('测试项目列表接口')
         r = self.projects.get_project_lists()  # 发送请求
         if jsonpath(r, '$..data..items..createdAt'):
-            r_jsonpath: list = jsonpath(r, '$..data..items..createdAt')  # 获取所有项目的创建时间数组
+            projects_create_times: list = jsonpath(r, '$..data..items..createdAt')  # 获取所有项目的创建时间数组
 
             try:
-                # assert_that(r_jsonpath, equal_to(sorted(r_jsonpath, reverse=True)))
-                assert r_jsonpath == sorted(r_jsonpath, reverse=True)  # 原数组是否和倒序排序后的数组相等？
+                # assert_that(projects_create_times, equal_to(sorted(projects_create_times, reverse=True)))
+                assert projects_create_times == sorted(projects_create_times, reverse=True)  # 原数组是否和倒序排序后的数组相等？
             except Exception as e:
                 logger.error(f"断言失败{e}, 项目列表默认不是按倒序排返回")
-                assert r_jsonpath == sorted(r_jsonpath, reverse=True)
+                assert projects_create_times == sorted(projects_create_times, reverse=True)
             else:
                 logger.info("断言成功，项目列表默认按创建时间倒序排返回")
 
@@ -228,3 +229,11 @@ class TestProtects:
             assert 'items' in r_data.keys()
         else:
             logger.info("断言成功，获取同组所有用户环境失败")
+
+    @pytest.mark.skip
+    def test_get_project_lists_ids(self):
+        # 删除所有项目（不是测试用例）
+        r = self.projects.get_project_lists()  # 发送请求
+        project_ids: list = jsonpath(r, '$.data.items..id')  # 获取所有项目的创建时间数组
+        for i in project_ids:
+            self.projects.delete_project(i)

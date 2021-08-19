@@ -25,7 +25,7 @@ allure 安装方式 https://github.com/allure-framework/allure2/releases/
 3. vim config/config.yaml  # 修改测试环境的url、用户名、密码（账号需提前创建好）
 4. pip install -r requirements.txt
 5. pytest -sv ./testcase --alluredir=./allure-results  # 执行测试
-6. allure server ./allure-results  # 查看报告
+6. allure serve ./allure-results  # 查看报告
 ```
 
 ### 文件目录说明

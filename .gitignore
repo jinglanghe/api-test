@@ -4,5 +4,5 @@ results/
 .pytest_cache
 __pycache__
 allure-results/
-log/
+log/*.log
 config/token.txt

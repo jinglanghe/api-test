@@ -9,7 +9,7 @@ data:
     config:
       imageSource: 镜像中心
       imageName: >-
-        harbor.apulis.cn:8443/algorithm/apulistech/horovod:0.20.0-tf2.3.0-torch1.6.0-mxnet1.6.0.post0-py3.7-cuda10.1-nni2.4
+        harbor.apulis.cn:8443/algorithm/apulistech/horovod:0.20.0-tf2.3.0-torch1.6.0-mxnet1.6.0.post0-py3.7-cuda10.1-nni1.9
 #      imageName: ubuntu:18.04
       dataSets: []
       resourceInfo:

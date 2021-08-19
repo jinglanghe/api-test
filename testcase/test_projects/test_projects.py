@@ -209,6 +209,13 @@ class TestProtects:
                 logger.info("断言成功，停止代码开发环境成功")
 
             #  数据清理
+            # 查询job的状态，当job状态变为terminated，再去删除项目
+            time_flag_close = 0
+            while lab_status != self.code_lab_status['terminated'] and time_flag_close < 60:
+                time_flag_close += 1
+                r_status = self.projects.get_code_lab(project_id)
+                lab_status = jsonpath(r_status, '$.data.status')[0]
+                time.sleep(1)
             self.projects.delete_project(project_id)
             logger.info(f"数据清理，删除项目，id {project_id}")
 

@@ -33,7 +33,6 @@ class TestProtects:
         # test_projects的测试数据 test_data_projects
         self.test_data_projects: dict = self.read.read_config(os.path.join(pwd, '../../test_data/test_projects.yaml'))
         self.now_time = datetime.strftime(datetime.now(), '%Y-%m-%d  %H:%M:%S')
-        logger.info('执行项目管理测试用例')
 
         # 处理项目名称、描述、类型，得到payload
         # eg:
@@ -62,6 +61,10 @@ class TestProtects:
     #     #  数据清理
     #     self.projects.delete_project(self.project_id)
     #     logger.info(f"数据清理，删除项目，id {self.project_id}")
+
+    def setup_class(self):
+        logger.info('执行项目管理测试用例')
+
     # @pytest.mark.repeat(20)
     @allure.story('项目列表接口，测试正常创建专家模式项目')
     def test_create_project(self):
@@ -236,10 +239,10 @@ class TestProtects:
         try:
             assert 'items' in r_data.keys()  # 接口有返回items字段
         except Exception as e:
-            logger.error(f"断言失败{e}, 获取同组所有用户环境成功")
+            logger.error(f"断言失败{e}, 获取同组所有用户环境失败")
             assert 'items' in r_data.keys()
         else:
-            logger.info("断言成功，获取同组所有用户环境失败")
+            logger.info("断言成功，获取同组所有用户环境成功")
 
     @pytest.mark.skip
     def test_get_project_lists_ids(self):

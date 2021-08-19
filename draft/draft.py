@@ -15,3 +15,6 @@ with open(os.path.join(pwd, '../test_assert/test_base.yaml'), 'r', encoding='utf
     api_msg_success = api_base['api']['response']['msg']['success']
 
     print(api_code_success, api_msg_success)
+
+print('confict test')
+print('11111111111111111')

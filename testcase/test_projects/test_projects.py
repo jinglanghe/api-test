@@ -83,9 +83,9 @@ class TestProtects:
             logger.info("断言成功，项目添加成功")
 
         # 数据清理
-        # project_id = jsonpath(r, '$.data.id')[0]
-        # self.projects.delete_project(project_id)
-        # logger.info(f"数据清理，删除项目，id {project_id}")
+        project_id = jsonpath(r, '$.data.id')[0]
+        self.projects.delete_project(project_id)
+        logger.info(f"数据清理，删除项目，id {project_id}")
 
     @allure.story('项目列表接口，测试项目列表默认按创建时间【倒序】排返回')
     def test_get_project_lists(self):

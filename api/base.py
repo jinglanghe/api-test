@@ -91,7 +91,8 @@ class Base:
             logger.info(f'Request body:  {json.loads(response.request.body)}')
         else:
             logger.info(f'Request body:  {response.request.body}')
-        logger.info(response.json())
+        logger.info(f'Response:  {response.json()}')
+        logger.info(f'Elapsed time: {int(response.elapsed.total_seconds()*1000)} ms')
         return response.json()
 
 

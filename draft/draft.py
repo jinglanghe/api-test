@@ -6,16 +6,9 @@
 @DESC  : 
 """
 
-import os
-import yaml
-pwd = os.path.dirname(__file__)
-with open(os.path.join(pwd, '../test_assert/test_base.yaml'), 'r', encoding='utf8') as h:
-    api_base = yaml.safe_load(h)
-    api_code_success = api_base['api']['response']['code']['success']
-    api_msg_success = api_base['api']['response']['msg']['success']
+import requests
 
-    print(api_code_success, api_msg_success)
 
-print('confict test')
-print('33333333333333333')
+r = requests.request('get', "https://www.baidu.com")
 
+print(r.elapsed.total_seconds()*1000)

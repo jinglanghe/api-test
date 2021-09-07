@@ -6,3 +6,4 @@ __pycache__
 allure-results/
 log/*.log
 config/token.txt
+not_clean_case/
